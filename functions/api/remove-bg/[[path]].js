@@ -1,8 +1,4 @@
-interface Env {
-  REMOVE_BG_API_KEY: string
-}
-
-export const onRequest: PagesFunction<Env> = async (context) => {
+export async function onRequest(context) {
   if (context.request.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 })
   }
