@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
+import type { NextRequest } from "next/server"
 
 const handler = NextAuth({
   providers: [
@@ -21,4 +22,10 @@ const handler = NextAuth({
   },
 })
 
-export { handler as GET, handler as POST }
+export async function GET(req: NextRequest) {
+  return handler(req)
+}
+
+export async function POST(req: NextRequest) {
+  return handler(req)
+}
