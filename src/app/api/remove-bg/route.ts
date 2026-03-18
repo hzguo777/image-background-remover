@@ -1,7 +1,11 @@
 export const runtime = 'edge'
 
-export async function POST(request: Request) {
-  const apiKey = process.env.REMOVE_BG_API_KEY
+interface Env {
+  REMOVE_BG_API_KEY?: string
+}
+
+export async function POST(request: Request, { env }: { env: Env }) {
+  const apiKey = env.REMOVE_BG_API_KEY || process.env.REMOVE_BG_API_KEY
   if (!apiKey) {
     return Response.json({ error: 'API key not configured' }, { status: 500 })
   }
