@@ -1,22 +1,17 @@
-import type { Metadata } from 'next'
-import './globals.css'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Remove Image Background Free Online | BG Remover',
-  description:
-    'Remove background from images instantly with AI. Free online tool, no signup required. Supports JPG, PNG, WebP.',
-  keywords: 'image background remover, remove bg, background eraser, transparent background',
-  openGraph: {
-    title: 'Remove Image Background Free Online',
-    description: 'AI-powered background removal. Free, instant, no signup.',
-    type: 'website',
-  },
-}
+import { SessionProvider } from 'next-auth/react'
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-gray-50 text-gray-900 font-sans">{children}</body>
+      <body>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
     </html>
   )
 }
