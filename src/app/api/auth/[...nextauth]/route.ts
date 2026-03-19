@@ -20,7 +20,18 @@ const { handlers } = NextAuth({
       }
       return session
     },
+    async signIn({ user, account, profile }) {
+      // 允许所有登录
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      // 确保重定向到正确的 URL
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    },
   },
+  debug: true, // 启用调试模式
 })
 
 export const GET = handlers.GET
