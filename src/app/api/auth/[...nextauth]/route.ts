@@ -2,6 +2,8 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
 
+export const runtime = 'edge'
+
 const { handlers } = NextAuth({
   providers: [
     GoogleProvider({
