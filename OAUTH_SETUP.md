@@ -47,19 +47,21 @@ openssl rand -base64 32
 
 **Production 环境：**
 
-| 变量名 | 类型 | 值 |
-|--------|------|-----|
-| `NEXTAUTH_URL` | Plain text | `https://your-domain.pages.dev` |
-| `NEXTAUTH_SECRET` | Encrypt | (你生成的密钥) |
-| `GOOGLE_CLIENT_ID` | Plain text | (Google OAuth 客户端 ID) |
-| `GOOGLE_CLIENT_SECRET` | Encrypt | (Google OAuth 客户端密钥) |
-| `GITHUB_CLIENT_ID` | Plain text | (GitHub OAuth 客户端 ID) |
-| `GITHUB_CLIENT_SECRET` | Encrypt | (GitHub OAuth 客户端密钥) |
-| `REMOVE_BG_API_KEY` | Encrypt | (你的 remove.bg API 密钥) |
+| 变量名 | 值示例 |
+|--------|--------|
+| `NEXTAUTH_URL` | `https://imagebackgroundremover.space` |
+| `NEXTAUTH_SECRET` | (使用 `openssl rand -base64 32` 生成) |
+| `GOOGLE_CLIENT_ID` | (Google OAuth 客户端 ID) |
+| `GOOGLE_CLIENT_SECRET` | (Google OAuth 客户端密钥) |
+| `GITHUB_CLIENT_ID` | `Ov23liOryGALTwLbQwks` (你的 GitHub OAuth 客户端 ID) |
+| `GITHUB_CLIENT_SECRET` | (GitHub OAuth 客户端密钥) |
+| `REMOVE_BG_API_KEY` | (你的 remove.bg API 密钥) |
 
-**注意事项：**
-- 敏感信息（Secret、密钥）选择 **Encrypt** 类型
-- 非敏感信息（URL、ID）可以选择 **Plain text** 类型
+**重要说明：**
+- ⚠️ **Cloudflare Pages 的所有环境变量都会自动加密存储为 Secret 类型**
+- 在配置界面中，你只会看到 **"Secret"** 选项，这是正常的安全设计
+- 所有变量（包括 URL 和 ID）都会被安全加密存储
+- 不需要手动选择 "Plain text" 或 "Encrypt"，系统会自动处理
 - 每个环境变量都可以为 Production、Preview、Development 分别设置不同的值
 
 ### Preview 环境（可选）：
@@ -140,7 +142,7 @@ npm run deploy
 - 检查所有 OAuth 凭据是否正确
 - 查看 Cloudflare Pages 的 Functions 日志排查问题
 
-## Cloudflare Pages 环境变量配置截图位置
+## Cloudflare Pages 环境变量配置说明
 
 在 Cloudflare Dashboard 中：
 ```
@@ -151,9 +153,11 @@ Workers & Pages
   → 点击 "Add variables" 按钮
 ```
 
-这里可以添加两种类型的变量：
-- **Plain text**: 非敏感信息（如 URL、Client ID）
-- **Encrypt**: 敏感信息（如 Secret、API Key）
+**关于变量类型：**
+- Cloudflare Pages 的所有环境变量都会自动加密存储
+- 配置界面只显示 **"Secret"** 类型，这是正常的
+- 你不需要（也无法）手动选择 "Plain text" 或其他类型
+- 所有变量都会被安全加密，包括 URL 和 ID
 
 ## 参考链接
 
