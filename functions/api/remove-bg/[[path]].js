@@ -8,14 +8,14 @@ export async function onRequest(context) {
     return Response.json({ error: 'API key not configured' }, { status: 500 })
   }
 
-  let formData: FormData
+  let formData
   try {
     formData = await context.request.formData()
   } catch {
     return Response.json({ error: 'Invalid request' }, { status: 400 })
   }
 
-  const file = formData.get('image') as File | null
+  const file = formData.get('image')
   if (!file) {
     return Response.json({ error: 'No image provided' }, { status: 400 })
   }
@@ -33,7 +33,7 @@ export async function onRequest(context) {
   body.append('image_file', file)
   body.append('size', 'auto')
 
-  let res: Response
+  let res
   try {
     res = await fetch('https://api.remove.bg/v1.0/removebg', {
       method: 'POST',
