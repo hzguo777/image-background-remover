@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google"
 export const runtime = 'edge'
 
 const { handlers } = NextAuth({
+  trustHost: true,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
